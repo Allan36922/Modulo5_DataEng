@@ -106,7 +106,6 @@ Containers | storagebqgold |
 	- No Files
 
 
-
 * Pipilenes: 
 	- 01-Master
 	- 02-OnPrime-Bronce
@@ -117,40 +116,64 @@ Pipeline : 01-Master Pipeline
 	03-Bronce-Silver | Pin-Bronce-Silver
 
 Pipeline : 02-OnPrime-Bronce
-	Get Tables Names: (Lee la lista de tablas de on-prime)	
-		Source Datasets : ds_mysql_table_list (lista de tablas)
-		Query : 'SELECT TABLE_SCHEMA, TABLE_NAME FROM information_schema.tables WHERE table_schema = 'retail_db''
+	Get Tables Names: 
+	(Lee la lista de tablas de on-prime)	
+		Source Datasets : ds_mysql_table_list 
+		(lista de tablas)
+		Query : 'SELECT TABLE_SCHEMA, TABLE_NAME 
+		FROM information_schema.tables WHERE table_schema = 'retail_db''
 	
-    ForEach : () ( recibe el listado de tablas para ser almacenadas)
-    Datasets : ds_mysql_table_list (Almacenar el nombre de las tablas de la base de datos on-premises)
-    Parameters : @activity('Get Tables Names').output.value  (Parametro de entrada usado en el ForEach proveniente de la actividad de Get Tables Names)
+    ForEach : () 
+	( recibe el listado de tablas para ser almacenadas)
+    Datasets : ds_mysql_table_list 
+	(Almacenar el nombre de las tablas de la base de datos on-premises)
+    Parameters : @activity('Get Tables Names').output.value  
+	(Parametro de entrada usado en el ForEach proveniente de 
+	la actividad de Get Tables Names)
         Copy data2: 
             Source:
-                Source Datasets : ds_MySql_source (Dataset tipo mysql empleado para leer cada una de las tablas)
-                Parameters : @item().TABLE_NAME (Parametro empleado en ds_MySQL_source para obtener cada uno de los nombres provenientes de la actividad de Get List de manera dinamica)
+                Source Datasets : ds_MySql_source 
+				(Dataset tipo mysql empleado para leer cada una de las tablas)
+                Parameters : @item().TABLE_NAME 
+				(Parametro empleado en ds_MySQL_source para obtener cada uno de 
+				los nombres provenientes de la actividad de Get List de manera dinamica)
             Sink:
-                Sink dataset : Avro1 (Cada tabla se guarda en formato avro dentro del Storage Bronce)
-                Dataset properties : @concat(item().TABLE_NAME,'.avro')  (Empleado para darle el tipo de formato a cada uno de los archivos avro que corresponde a cada tabla)
+                Sink dataset : Avro1 
+				(Cada tabla se guarda en formato avro dentro del Storage Bronce)
+                Dataset properties : @concat(item().TABLE_NAME,'.avro')  
+				(Empleado para darle el tipo de formato a cada uno de los 
+				archivos avro que corresponde a cada tabla)
         Validate data bronce_copy1 (Databricks)    
-            Notebook path : /M5_Proyect/Notebook-Validation-Data (Notebook empleado para realizar las transformaciones y logs respectivos)
-            Base parameters: adf_input : @string(activity('Copy data2').output) (Parametro de entrada usado en el databricks , para leer la salida generada de cada actividad de copy data)
+            Notebook path : /M5_Proyect/Notebook-Validation-Data 
+			(Notebook empleado para realizar transformaciones y 
+			lectura de logs respectivos)
+            Base parameters: adf_input : @string(activity('Copy data2').output) 
+			(Parametro de entrada usado en el databricks , para leer la salida 
+			generada de cada actividad de copy data)
 
 
 Pipeline : 03-Pin-Bronce-Silver
-	Get Data Bronce: (Lee la lista de tablas de Bronce)	
-		Dataset : Avro2 (lee las tablas en formato avro dentro del Storage bronce)
+	Get Data Bronce: 
+	(Lee la lista de tablas de Bronce)	
+		Dataset : Avro2 
+		(lee las tablas en formato avro dentro del Storage bronce)
 		Argument : Child Items
 		
-    ForEach : () ( recibe el listado de tablas para ser almacenadas en formato parquet en Silver area)	
+    ForEach : () 
+	( recibe el listado de tablas para ser almacenadas en formato parquet en Silver area)	
 		Copy data migrate tables b-s:
-			Source dataset : Avro1 (listado de tablas que se guardaran en formato parquet en Silver)
+			Source dataset : Avro1 
+			(listado de tablas que se guardaran en Silver)
 			Sink dataset  : ds_destination_silver
 
 Linked services:
-AzureDatabricks1 | Azure Databricks
-ls_adls_silver | Azure Data Lake Storage Gen2
-ls_retaildb_adls_temp | Azure Data Lake Storage Gen2
-ls_retaildb_mysql_dwh | MySQL 
+	- AzureDatabricks1 | Azure Databricks
+
+	- ls_adls_silver | Azure Data Lake Storage Gen2
+
+	- ls_retaildb_adls_temp | Azure Data Lake Storage Gen2
+
+	- ls_retaildb_mysql_dwh | MySQL 
 
 Datasets:
 02-OnPrime-Bronce | Pln-OnPrime-Bronce
@@ -168,7 +191,7 @@ Datasets:
 
 ### El paso a paso en la migración de MYSql a Azure Datalake:
 
-Ofrecemos aqui una posible guia paso a paso para migrar de una base de datos MySQL a un datalake en Microsoft Azure, utilizando Data Factory, Databricks y Synapse y sería el siguiente:
+Ofrecemos aqui una posible guia para el paso a paso para migrar de una base de datos MySQL a un datalake en Microsoft Azure, utilizando Data Factory, Databricks y Synapse y sería el siguiente:
 
 1- Crear el servicio vinculado de MySQL en Data Factory, que será el origen de la migración. 
 
