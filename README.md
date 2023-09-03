@@ -21,18 +21,22 @@ El objetivo es realizar la migración desde el entorno local hasta el cloud, y p
 ### Desarrollo:
 
 Migración de una base de datos MySql alojada en Google Cloud Platform a un datalake en Microsoft Azure, utilizando: 
+
 1- Data Storage para la creación de las tres áreas del Datalake:
     - Bronce: consume las tablas de MySQL y las guarda en formato avro.
              : se almacena la lectura de logs en formato csv.
     - Silver: se ingesta las tablas en formato parquet para ser analizadas por synapse.
+
 2- Data Factory para la ingesta de datos utilizando pipelines:
     a- Creación de un pipeline Master que orquestara la ejecución de los otros pipelines.
     b- Creación de un pipeline para la migración de datos entre on-premise a bronce.
     c- Creación de un pipeline para la migración de datos entre bronce a silver.
+
 3- Azure Databricks 
     - Leer los logs del copy data (On-prime a bronce) y dejarlos en formato csv para su consumo.
     - Agregar columnas de validación al csv como la fecha de finalización y diferencia en cantidad de registros Rows Read - Rows Write, esto como indicado de error para mostrar en un dashboard en Power BI.
     - Tratamiento de los archivos logs resumiéndolos con spark y generando un solo dataframe para ingesta en la tabla de bitácora con formato parquet.
+
 4- Azure Synapce Analytics  
     - Synapse Analytics para el procesamiento de las tablas en formato parquet.
     - Se creo una base de datos serverless llamada retail_db.
@@ -77,10 +81,15 @@ Containers | storagebqbronce |
 	- products.avro
 outputlog : Directory
 	- fileoutputlog_2023-09-02 16:02:49.961721.csv
+
 	- fileoutputlog_2023-09-02 16:03:22.078942.csv
+
 	- fileoutputlog_2023-09-02 16:03:50.349318.csv
+
 	- fileoutputlog_2023-09-02 16:04:23.192486.csv
+
 	- fileoutputlog_2023-09-02 16:04:52.514245.csv
+
 	- fileoutputlog_2023-09-02 16:05:24.087958.csv
 
 Containers | storagebqsilver | 
@@ -162,16 +171,27 @@ Datasets:
 Ofrecemos aqui una posible guia paso a paso para migrar de una base de datos MySQL a un datalake en Microsoft Azure, utilizando Data Factory, Databricks y Synapse y sería el siguiente:
 
 1- Crear el servicio vinculado de MySQL en Data Factory, que será el origen de la migración. 
+
 2- Crear un conjunto de datos de MySQL en Data Factory, que definirá la estructura y el formato de los datos de origen. 
+
 3- Crear una actividad de copia en Data Factory, que copiará los datos desde MySQL a Azure Data Lake Storage Gen2. 
+
 4- Crear un servicio vinculado de Azure Data Lake Storage Gen2 en Data Factory, que será el destino de la migración. 
+
 5- Crear un conjunto de datos de Azure Data Lake Storage Gen2 en Data Factory, que definirá la estructura y el formato de los datos de destino.
+
 6- Crear un servicio vinculado de Azure Databricks en Data Factory, que se utilizará para ejecutar los notebooks de Databricks que transformarán los datos durante la migración. 
+
 7- Crear un notebook de Databricks, que transformará los datos copiados a un formato optimizado para el análisis, como Parquet o Delta Lake. 
+
 8- Crear una actividad de Databricks en Data Factory, que ejecutará el notebook creado en el paso anterior. 
+
 9- Crear un servicio vinculado de Azure Synapse Analytics en Data Factory, que se utilizará para acceder al datalake desde Synapse. 
+
 10- Conectar Azure Synapse Analytics al datalake creado en Azure Data Lake Storage Gen2, para poder acceder y analizar los datos migrados desde Synapse.
+
 11- Crear una canalización en Data Factory, que encadenará las actividades creadas en los pasos anteriores y definirá los parámetros y las dependencias entre ellas.
+
 12- Ejecutar y supervisar la canalización creada en Data Factory, que realizará la migración de los datos desde MySQL a Azure Data Lake Storage Gen2.
 
 ### Links de interes:
