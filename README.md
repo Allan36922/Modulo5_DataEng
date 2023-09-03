@@ -43,7 +43,8 @@ Migración de una base de datos MySql alojada en Google Cloud Platform a un data
  
 ### Detalle de arquitectura:
 
-![Arquitectura de la solución propuesta.](https://github.com/Allan36922/Modulo4_DataEng/blob/main/imgs/10-Corrida%20exitosa.png)
+![Arquitectura de la solución propuesta.](https://github.com/Allan36922/Modulo5_DataEng/blob/main/imgs/ModeloArqutAzureDatalake.png)
+
 
 
 * Ambiente On-premise 
