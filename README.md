@@ -177,8 +177,7 @@ Ofrecemos aqui una posible guia paso a paso para migrar de una base de datos MyS
 ### Links de interes:
 Links de interes:
 
-* [Copia y transformación de datos en Azure Data Lake Storage Gen2](https://learn.microsoft.
-com/es-es/azure/data-factory/connector-azure-data-lake-storage)
+* [Copia y transformación de datos en Azure Data Lake Storage Gen2](https://learn.microsoft.com/es-es/azure/data-factory/connector-azure-data-lake-storage)
 
 * [Tutorial: Migración de MySQL a Azure Database for MySQL sin conexión](https://learn.microsoft.com/es-es/azure/dms/tutorial-mysql-azure-mysql-offline-portal)
 
