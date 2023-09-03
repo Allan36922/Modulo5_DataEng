@@ -176,7 +176,26 @@ Ofrecemos aqui una posible guia paso a paso para migrar de una base de datos MyS
 
 ### Links de interes:
 Links de interes:
-### [(1) Copia y transformación de datos en Azure Data Lake Storage Gen2](https://learn.microsoft.com/es-es/azure/data-factory/connector-azure-data-lake-storage)
+
+* [Copia y transformación de datos en Azure Data Lake Storage Gen2](https://learn.microsoft.
+com/es-es/azure/data-factory/connector-azure-data-lake-storage)
+
+* [Tutorial: Migración de MySQL a Azure Database for MySQL sin conexión](https://learn.microsoft.com/es-es/azure/dms/tutorial-mysql-azure-mysql-offline-portal)
+
+* [Guía de migración: SQL Server a Azure SQL Database.](https://learn.microsoft.com/es-es/azure/azure-sql/migration-guides/database/sql-server-to-sql-database-guide?view=azuresql)
+
+* [Migración de bases de datos MySQL a SQL Server: Azure SQL Database](https://learn.microsoft.com/es-es/sql/ssma/mysql/migrating-mysql-databases-to-sql-server-azure-sql-db-mysqltosql?view=sql-server-ver16)
+
+* [Copia de datos de MySQL con Azure Data Factory o Synapse Analytics](https://learn.microsoft.com/es-es/azure/data-factory/connector-mysql)
+
+
+* [Ejecución de un cuaderno de Databricks con la actividad Notebook de Databricks en Azure Data Factory](https://learn.microsoft.com/es-es/azure/data-factory/transform-data-using-databricks-notebook)
+
+* [Copia y transformación de datos en Azure Synapse Analytics mediante canalizaciones de Azure Data Factory o Synapse](https://learn.microsoft.com/es-es/azure/data-factory/connector-azure-sql-data-warehouse)
+
+* [Conjuntos de datos de Azure Data Factory y Azure Synapse Analytics](https://learn.microsoft.com/es-es/azure/data-factory/concepts-datasets-linked-services)
+
+* [Canalizaciones y actividades en Azure Data Factory y Azure Synapse Analytics](https://learn.microsoft.com/es-es/azure/data-factory/concepts-pipelines-activities)
 
 
 
